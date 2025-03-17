@@ -133,7 +133,7 @@ jobs:
         run: |
           argocd login localhost:8888 --username admin --password $ARGOCD_PASSWORD --insecure --grpc-web
         env:
-          ARGOCD_SERVER: "localhost:8888"
+          ARGOCD_SERVER: "https:://localhost:8888"
           ARGOCD_USERNAME: "admin"
           ARGOCD_PASSWORD: "4KVENBMhuRrdNY8h"
 
