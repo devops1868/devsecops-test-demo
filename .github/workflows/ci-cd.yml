@@ -5,6 +5,8 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main, develop]
+permissions:
+  contents: write
 
 jobs:
   
@@ -95,7 +97,7 @@ jobs:
         run: |
           IMAGE_TAG=ghcr.io/${{ github.repository }}:latest
           docker push $IMAGE_TAG
-
+     
   # Step 5: Update Kubernetes Deployment YAML
   update_image_tag:
     runs-on: ubuntu-latest
