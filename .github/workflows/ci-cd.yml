@@ -78,7 +78,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to GitHub Container Registry
-        run: echo "${{ secrets.DEMO_TOKEN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+        run: echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
 
       - name: Build Docker Image
         run: |
@@ -133,7 +133,7 @@ jobs:
         run: |
           argocd login localhost:8888 --username admin --password $ARGOCD_PASSWORD --insecure --grpc-web
         env:
-          ARGOCD_SERVER: "https:://localhost:8888"
+          ARGOCD_SERVER: "https://localhost:8888"
           ARGOCD_USERNAME: "admin"
           ARGOCD_PASSWORD: "4KVENBMhuRrdNY8h"
 
