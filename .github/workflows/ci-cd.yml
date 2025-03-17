@@ -107,7 +107,7 @@ jobs:
       - name: Update Kubernetes Deployment Image
         run: |
           IMAGE_TAG=ghcr.io/${{ github.repository }}:latest
-          sed -i "s|image: .*|image: $IMAGE_TAG|" k8s/deployment.yaml
+          sed -i "s|image: .*|image: $IMAGE_TAG|" kubernetes/deployment.yaml
 
       - name: Commit and Push Changes
         run: |
