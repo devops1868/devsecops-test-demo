@@ -106,9 +106,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Update Kubernetes Deployment Image
+      - name: Update Kubernetes Deployment Image 
         run: |
-          IMAGE_TAG=ghcr.io/${{ github.repository }}:latest
+          IMAGE_TAG=ghcr.io/${{ github.repository }}:${{ github.sha }}
           sed -i "s|image: .*|image: $IMAGE_TAG|" kubernetes/deployment.yaml
 
       - name: Commit and Push Changes
