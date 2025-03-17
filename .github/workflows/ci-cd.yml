@@ -120,22 +120,16 @@ jobs:
 
   # Step 6: Deploy to Kubernetes with ArgoCD
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted  # ✅ Runs on your local machine
     needs: update_image_tag
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install ArgoCD CLI
-        run: |
-          curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-          chmod +x argocd-linux-amd64
-          sudo mv argocd-linux-amd64 /usr/local/bin/argocd
-
       - name: Port Forward ArgoCD
         run: |
           kubectl port-forward svc/argocd-server -n argocd 8888:443 &
-          sleep 10  # Give it time to establish
+          sleep 5  # Give some time for port-forwarding to start
 
       - name: Login to ArgoCD
         run: |
