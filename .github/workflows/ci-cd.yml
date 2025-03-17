@@ -128,7 +128,7 @@ jobs:
 
       - name: Port Forward ArgoCD
         run: |
-          kubectl port-forward svc/argocd-server -n argocd 8888:443 &
+          kubectl port-forward svc/argocd-server -n argocd 8888:80 &
           sleep 5  # Give some time for port-forwarding to start
 
       - name: Login to ArgoCD
