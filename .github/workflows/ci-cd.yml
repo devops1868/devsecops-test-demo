@@ -131,12 +131,17 @@ jobs:
 
       - name: Login to ArgoCD
         run: |
-          argocd login localhost:8888 --username admin --password $ARGOCD_PASSWORD --insecure --grpc-web
+          argocd login $ARGOCD_SERVER --username $ARGOCD_USERNAME --password $ARGOCD_PASSWORD --insecure --grpc-web
         env:
-          ARGOCD_SERVER: "https://localhost:8888"
+          ARGOCD_SERVER: "argocd-server.argocd.svc.cluster.local"
           ARGOCD_USERNAME: "admin"
-          ARGOCD_PASSWORD: "4KVENBMhuRrdNY8h"
+          ARGOCD_PASSWORD: "${{ secrets.ARGOCD_PASSWORD }}"
+
+      - name: Update ArgoCD Application Image
+        run: |
+          argocd app set my-app --parameter image.tag=${{ needs.update_image_tag.outputs.NEW_TAG }}
 
       - name: Sync Application
         run: |
           argocd app sync my-app
+ 
